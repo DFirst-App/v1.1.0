@@ -487,7 +487,7 @@ function BotCard({ bot }: { bot: BotCard }) {
               <TouchableOpacity
                 style={[styles.communityButton, { backgroundColor: '#0088cc' }]}
                 onPress={() => {
-                  Linking.openURL('https://t.me/+YAJDx7uwVcRhMjRk');
+                  Linking.openURL('https://t.me/+hKMwtHTMf_lmYjE0');
                   setShowCommunityModal(false);
                 }}
               >
@@ -497,7 +497,7 @@ function BotCard({ bot }: { bot: BotCard }) {
               <TouchableOpacity
                 style={[styles.communityButton, { backgroundColor: '#25D366' }]}
                 onPress={() => {
-                  Linking.openURL('https://chat.whatsapp.com/E1kSuMhFxulJcZiwoQyoRU');
+                  Linking.openURL('https://whatsapp.com/channel/0029Vb6sxFG9xVJWbyIwL110');
                   setShowCommunityModal(false);
                 }}
               >
@@ -645,7 +645,7 @@ function TradingScreen() {
                 <TouchableOpacity
                   style={[styles.communityButton, { backgroundColor: '#0088cc' }]}
                   onPress={() => {
-                    Linking.openURL('https://t.me/+YAJDx7uwVcRhMjRk');
+                    Linking.openURL('https://t.me/+hKMwtHTMf_lmYjE0');
                     setShowComingSoonModal(false);
                   }}
                 >
@@ -655,7 +655,7 @@ function TradingScreen() {
                 <TouchableOpacity
                   style={[styles.communityButton, { backgroundColor: '#25D366' }]}
                   onPress={() => {
-                    Linking.openURL('https://chat.whatsapp.com/E1kSuMhFxulJcZiwoQyoRU');
+                    Linking.openURL('https://whatsapp.com/channel/0029Vb6sxFG9xVJWbyIwL110');
                     setShowComingSoonModal(false);
                   }}
                 >

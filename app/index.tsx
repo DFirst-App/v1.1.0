@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
-import { StyleSheet, TextInput, TouchableOpacity, View, Alert, Animated as RNAnimated } from 'react-native';
+import { StyleSheet, TextInput, TouchableOpacity, View, Alert, Animated as RNAnimated, ActivityIndicator } from 'react-native';
 import { Link, router } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Animated, { useSharedValue, useAnimatedStyle, withRepeat, withSequence, withTiming, withSpring, Easing, FadeIn, FadeOut, SlideInDown } from 'react-native-reanimated';
-import { loginWithEmail, resetPassword } from './firebase.config';
+import { loginWithEmail, resetPassword, onAuthChanged } from './firebase.config';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { ThemedText } from '@/components/ThemedText';
 import { Ionicons } from '@expo/vector-icons';
@@ -23,6 +23,7 @@ function LoginScreen() {
   const emailScale = useSharedValue(1);
   const [isResetMode, setIsResetMode] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [authInitializing, setAuthInitializing] = useState(true);
 
   useEffect(() => {
     loadSavedEmail();
@@ -34,6 +35,13 @@ function LoginScreen() {
       ),
       2
     );
+    const unsubscribe = onAuthChanged((user) => {
+      if (user) {
+        router.replace('/(app)/home');
+      }
+      setAuthInitializing(false);
+    });
+    return unsubscribe;
   }, []);
 
   useEffect(() => {
@@ -145,6 +153,16 @@ function LoginScreen() {
       if (email) setResetEmail(email);
     }
   };
+
+  if (authInitializing) {
+    return (
+      <SafeAreaView edges={['top']} style={styles.safeArea}>
+        <View style={styles.loadingContainer}>
+          <ActivityIndicator size="large" color="#007AFF" />
+        </View>
+      </SafeAreaView>
+    );
+  }
 
   return (
     <SafeAreaView edges={['top']} style={styles.safeArea}>
@@ -482,6 +500,12 @@ const styles = StyleSheet.create({
     bottom: 0,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  loadingContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#FFFFFF',
   },
 });
 
